@@ -1,10 +1,10 @@
-import { addUser } from "@/app/api/resgiter";
+import { addUser, loginUser } from "@/app/api/resgiter";
 import useStore from "@/app/store/store";
 import React, { useState } from "react";
 
-export default function RegisEmail() {
+export default function LoginEmail() {
     const [controlCheck, setControlCheck] = useState(false);
-    const { updateUser, changeHeaderState } = useStore()
+    const { updateUser, headerState, changeHeaderState } = useStore()
     const [errorText, setErrorText] = useState("")
 
     const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -16,12 +16,11 @@ export default function RegisEmail() {
         const fields = Object.fromEntries(new window.FormData(event.target as HTMLFormElement));
         const { name, email, date } = fields
         const datas = {
-            username: name.toString(),
             email: email.toString(),
             date: date.toString(),
         }
 
-        const request = await addUser(datas)
+        const request = await loginUser(datas)
         if (request.response.user) {
             updateUser(request.response.user)
             changeHeaderState(false)
@@ -34,10 +33,6 @@ export default function RegisEmail() {
         <form className="w-[500px] flex flex-col justify-center items-center" onSubmit={handleSubmit}>
             <p className="text-2xl text-center font-semibold">Ingresa tus datos para registrarte</p>
             <div className="flex flex-col w-full px-4 text-xl py-6 justify-center items-center gap-4">
-                <input
-                    className="bg-gray-100 border-gray-400/70 border-2 py-4 px-4 w-full shadow-lg"
-                    type="text" name="name" id="name" placeholder="Nombre y Apellido" required
-                />
                 <input
                     className="bg-gray-100 border-gray-400/70 border-2 py-4 px-4 w-full shadow-lg"
                     type="email" name="email" id="email" placeholder="Correo electrónico" required

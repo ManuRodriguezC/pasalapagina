@@ -5,6 +5,12 @@ interface User {
     date: string;
   }
 
+interface LoginUser {
+  email?: string;
+  phone?: string;
+  date: string;
+}
+
 export const controlUser = async (url: string, userData: any, method: string) => {
     try {
       const options = {
@@ -34,3 +40,8 @@ export const addUser = async (datas: User) => {
   const result = await controlUser('http://localhost:3011/registro', datas, 'POST');
   return result
 };
+
+export const loginUser = async (datas: LoginUser) => {
+  const result = await controlUser('http://localhost:3011/login', datas, 'POST');
+  return result
+}

@@ -6,7 +6,12 @@ import Back from "@/icons/Back";
 
 export default function Header() {
     
-    const { headerState, changeHeaderState } = useStore()
+    const { headerState, changeHeaderState, login, closeSesion } = useStore()
+
+    const handleClickClose = () => {
+        closeSesion()
+        changeHeaderState(false)
+    }
 
     return (
         <header className="w-full h-20 bg-[#0C3440] flex justify-around items-center duration-300">
@@ -21,6 +26,7 @@ export default function Header() {
                 </button>
             }
             <Image src={'/images/name.png'} alt="nametitle" width={230} height={50}/>
+            {login&&<button className="text-white" onClick={handleClickClose}>Cerrar Sesión</button>}
         </header>
     )
 }

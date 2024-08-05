@@ -4,15 +4,20 @@ import { StoreState, User } from "./types";
 const useStore = create<StoreState>((set) => ({
     login: false,
     headerState: false,
+    username: "",
+    date: "",
     changeHeaderState: (newState: boolean) => set(() => ({
         headerState: newState
     })),
-    username: "",
-    date: "",
-    updateUser: (datas: User, log: boolean) => set(() => ({
+    updateUser: (datas: User) => set(() => ({
         username: datas.username,
         date: datas.date,
-        login: log
+        login: true
+    })),
+    closeSesion: () => set(() => ({
+        username: "",
+        date: "",
+        login: false
     }))
 }))
 

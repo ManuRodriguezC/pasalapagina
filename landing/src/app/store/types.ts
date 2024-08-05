@@ -1,10 +1,11 @@
 export interface StoreState {
     login: boolean;
     headerState: boolean;
-    changeHeaderState: (newState: boolean) => void;
     username: string;
     date: string;
-    updateUser: (datas: User, log: boolean) => void
+    changeHeaderState: (newState: boolean) => void;
+    updateUser: (datas: User) => void
+    closeSesion: () => void;
 }
 
 export interface User {

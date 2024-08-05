@@ -4,7 +4,7 @@ import { useState } from "react";
 
 export default function RegisPhone() {
     const [controlCheck, setControlCheck] = useState(false);
-    const { updateUser } = useStore()
+    const { updateUser, changeHeaderState } = useStore()
     const [errorText, setErrorText] = useState("")
 
     const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -23,7 +23,8 @@ export default function RegisPhone() {
 
         const request = await addUser(datas)
         if (request.response.user) {
-            updateUser(request.response.user, true)
+            updateUser(request.response.user)
+            changeHeaderState(false)
         } else {
             setErrorText(request.response.message)
         }
